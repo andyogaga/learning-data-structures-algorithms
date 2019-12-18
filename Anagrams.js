@@ -55,3 +55,17 @@ const getMap2 = str => {
 
 let isAnagram2 = checkAnagram2('tEs ts  $t', 'stS^Tet');
 console.log(isAnagram2);
+
+// A simpler but tricky way, but better and faster
+const checkAnagram3 = (str, str2) => {
+  let cleanStr = getCleanString(str);
+  let cleanStr2 = getCleanString(str2);
+
+  return cleanStr === cleanStr2;
+}
+
+const getCleanString = str => {
+  return str.replace(/[^a-z]/ig, '').toLowerCase().split('').sort().join();
+}
+
+console.log(checkAnagram3('tEs ts  $t', 'stS^Tet'));
