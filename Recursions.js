@@ -15,3 +15,8 @@ const prodArray = (arr, i = 0) => {
   if(i === arr.length - 1) return arr[i];
   return arr[i] * prodArray(arr, i + 1);
 }
+
+// Palindrome
+const isPalindrome = str => {
+  
+}
