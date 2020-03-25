@@ -23,7 +23,7 @@ const chunk = (arr, n) => {
     bigArray.push(smallArray);
     index += n;
   }
-  console.log(bigArray);
+  return bigArray
 }
 
 chunk(testArray, 2);
