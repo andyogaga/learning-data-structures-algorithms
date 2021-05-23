@@ -17,7 +17,7 @@ class SinglyLinkedList {
     this.length = 0;
   }
 
-  push = val => {
+  push = (val) => {
     let node = new Node(val);
     if (!this.head) {
       this.head = node;
@@ -58,7 +58,7 @@ class SinglyLinkedList {
     return oldHead;
   };
 
-  unshift = val => {
+  unshift = (val) => {
     let newHead = new Node(val);
     if (!this.head) {
       this.head = newHead;
@@ -71,7 +71,7 @@ class SinglyLinkedList {
     return this;
   };
 
-  get = i => {
+  get = (i) => {
     if (!this.length || i >= this.length || i < 0) return null;
     let currentNode = this.head;
     let j = 0;
@@ -111,7 +111,7 @@ class SinglyLinkedList {
     return true;
   };
 
-  remove = i => {
+  remove = (i) => {
     if (!this.length || i >= this.length || i < 0) return false;
     if (i === 0) {
       this.shift();
@@ -136,19 +136,19 @@ class SinglyLinkedList {
       then set the head to the tail
       */
   reverse = () => {
-    if(!this.length) return undefined;
+    if (!this.length) return undefined;
     let current = this.head;
     [this.head, this.tail] = [this.tail, this.head];
     let prev = null;
     let next;
-    for (let i=0; i<this.length; i++){
+    for (let i = 0; i < this.length; i++) {
       next = current.next;
       current.next = prev;
       prev = current;
       current = next;
     }
     return this;
-  }
+  };
 }
 
 let list = new SinglyLinkedList();
@@ -159,3 +159,139 @@ list.push(556);
 console.log(list);
 console.log(list.reverse());
 // console.log(list.get(4));
+
+class Node {
+  constructor(val) {
+    this.data = val;
+    this.next = null;
+  }
+}
+
+class SinglyLinkedList2 {
+  constructor() {
+    this.head = null;
+    this.length = 0;
+  }
+
+  read(index) {
+    if (index === 0) {
+      return this.head;
+    } else {
+      let currentIndex = 0;
+      let currentNode = this.head;
+      while (index > currentIndex) {
+        currentNode = currentNode.next;
+        currentIndex++;
+        if (!currentNode) {
+          return null;
+        }
+      }
+      return currentNode;
+    }
+  }
+
+  search(val) {
+    let currentNode = this.head;
+    let currentIndex = 0;
+    while (currentNode) {
+      const node = this.read(currentIndex);
+      if (node.data === val) {
+        return node;
+      }
+      currentIndex++;
+      currentNode = currentNode.next;
+    }
+    return null;
+  }
+
+  push(val) {
+    if (!this.head) {
+      this.head = new Node(val);
+    } else {
+      const newNode = new Node(val);
+      let currentNode = this.head;
+      let currentIndex = 0;
+      while (currentNode.next) {
+        const node = this.read(currentIndex);
+        currentIndex++;
+        currentNode = node.next;
+      }
+      currentNode.next = newNode;
+    }
+    this.length++;
+  }
+
+  delete(index) {
+    if (!this.head) {
+      return null;
+    }
+    const presentNode = this.read(index);
+    const prevNode = this.read(index - 1);
+    const forwardNode = this.read(index + 1);
+    if (prevNode.next) {
+      prevNode.next = forwardNode;
+      this.length--;
+      return presentNode;
+    }
+  }
+
+  print() {
+    let currentNode = this.head;
+    if (!this.head) {
+      console.log([]);
+      return;
+    }
+    let str = "[";
+    while (currentNode.next) {
+      str += currentNode.data + ", ";
+      currentNode = currentNode.next;
+    }
+    str += currentNode.data + "]";
+    console.log(str);
+  }
+
+  shift() {
+    if (this.head) {
+      const currentHead = this.head;
+      this.head = this.head.next;
+      this.length--;
+      return currentHead;
+    } else {
+      return null;
+    }
+  }
+
+  unshift(val) {
+    const newNode = new Node(val);
+    newNode.next = this.head;
+    this.head = newNode;
+    this.length++;
+  }
+
+  pop() {
+    if (!this.head) return null;
+    let currentNode = this.head;
+    if (!this.head.next) {
+      this.head = null;
+      this.length--;
+      return currentNode;
+    }
+
+    let previousNode = null;
+    while (currentNode.next) {
+      previousNode = currentNode;
+      currentNode = currentNode.next;
+    }
+    previousNode.next = null;
+    this.length--;
+  }
+}
+
+const SLL = new SinglyLinkedList2();
+SLL.push("a");
+// SLL.push("b");
+// SLL.push("c");
+// SLL.push("d");
+// SLL.push("e");
+console.log(SLL.pop());
+SLL.print();
