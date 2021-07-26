@@ -6,12 +6,12 @@ const binarySearch = (arr = [], val) => {
       ? (endIndex - startIndex) / 2
       : (endIndex - startIndex + 1) / 2;
 
-      while (arr[middleIndex] !== val) {
-        if(arr[middleIndex] > val){
-          endIndex = arr[middleIndex]
-        }
-        if(arr[middleIndex]< val){
-          startIndex =  arr[middleIndex]
-        }
-      }
+  while (arr[middleIndex] !== val) {
+    if (arr[middleIndex] > val) {
+      endIndex = arr[middleIndex];
+    }
+    if (arr[middleIndex] < val) {
+      startIndex = arr[middleIndex];
+    }
+  }
 };
